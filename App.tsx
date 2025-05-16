@@ -1,8 +1,10 @@
 import {
     FlatList,
+    Keyboard,
     KeyboardAvoidingView,
     Platform,
     StyleSheet,
+    Text,
     TextInput,
     TouchableOpacity,
     View,
@@ -18,6 +20,7 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 export default function App() {
     const [userMsg, setUserMsg] = useState("");
     const [update, setUpdate] = useState(0);
+    const [loading, setLoading] = useState(false);
     const flatlistRef = useRef<FlatList>(null);
 
     async function AdicionaMensagens(msg: string) {
@@ -28,10 +31,15 @@ export default function App() {
                 user: true,
             };
             messages.push(newMessageUser);
+            setTimeout(() => {
+                setLoading((prev) => !prev);
+            }, 400);
+            closeKeyboard();
             setUserMsg("");
             setUpdate((prev) => prev + 1);
             const geminiResponse = await response(msg);
             if (geminiResponse) {
+                setLoading((prev) => !prev);
                 const newMessageAI: Message = {
                     id: generatesIdMessage(),
                     text: geminiResponse,
@@ -50,6 +58,12 @@ export default function App() {
         }, 100);
     }
 
+    function closeKeyboard() {
+        setTimeout(() => {
+            Keyboard.dismiss();
+        }, 100);
+    }
+
     function RenderItem({ item }: { item: Message }) {
         return <MessageBox {...item} />;
     }
@@ -60,16 +74,28 @@ export default function App() {
         >
             <SafeAreaProvider>
                 <SafeAreaView style={styles.container}>
-                    <FlatList
-                        ref={flatlistRef}
-                        data={messages}
-                        keyExtractor={(item) => item.id.toString()}
-                        renderItem={RenderItem}
-                        extraData={update}
-                        onContentSizeChange={scrollListToBottom}
-                        style={styles.list}
-                    />
-
+                    {messages.length > 0 ? (
+                        <FlatList
+                            ref={flatlistRef}
+                            data={messages}
+                            keyExtractor={(item) => item.id.toString()}
+                            renderItem={RenderItem}
+                            extraData={update}
+                            onContentSizeChange={scrollListToBottom}
+                            style={styles.list}
+                        />
+                    ) : (
+                        <View style={styles.emptyChat}>
+                            <Text style={styles.emptyChatMessage}>
+                                Digite o que sente ou como está, irei te ajudar!
+                            </Text>
+                        </View>
+                    )}
+                    {loading && (
+                        <Text style={styles.typing}>
+                            Assistente digitando...
+                        </Text>
+                    )}
                     <View style={styles.textInputContainer}>
                         <TextInput
                             placeholder="Digite aqui..."
@@ -97,6 +123,12 @@ const styles = StyleSheet.create({
     list: {
         flex: 1,
     },
+    emptyChat: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 20,
+    },
     textInputContainer: {
         flexDirection: "row",
         alignItems: "center",
@@ -119,5 +151,16 @@ const styles = StyleSheet.create({
         backgroundColor: "#d9d9d9",
         width: 45,
         height: 45,
+    },
+    typing: {
+        fontSize: 20,
+        fontWeight: "bold",
+        fontStyle: "italic",
+    },
+    emptyChatMessage: {
+        fontSize: 20,
+        fontWeight: "bold",
+        fontStyle: "italic",
+        textAlign: "center",
     },
 });
