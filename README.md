@@ -19,7 +19,7 @@ Aplicativo mobile desenvolvido com React Native, voltado ao suporte emocional de
 -   [React Native](https://reactnative.dev/)
 -   [Expo](https://expo.dev/)
 -   [TypeScript](https://www.typescriptlang.org/)
--   [FontAwesome](https://fontawesome.com/) – Ícones personalizados
+-   [FontAwesome](https://fontawesome.com/) – Ícones personalizados.
 -   [Gemini API](https://ai.google.dev/gemini-api/docs?hl=pt-br#javascript)
 
 ## 📦 Instalação
@@ -57,7 +57,21 @@ npm install
 yarn install
 ```
 
-### 4. Rodar o projeto
+### 4. Gerar uma API Key no Google AI Studio
+
+-   [Acesse o link do Google AI Studio](https://aistudio.google.com/app/apikey)
+-   Clique no botão no canto superior direito escrito, "Criar chave de API", e aguarde.
+-   Copie sua API Key que irá aparecer para você, NÃO COMPARTILHE ESSA CHAVE COM NINGUÉM!
+-   Caso por algum motivo você ja tenha um projeto no Google Cloud, clique no campo de pesquisa e selecione o projeto (provavelmente esteja nomeado como Gemini API, se existir), após isso clique no botão azul embaixo para gerar sua API Key.
+
+#### 5. Insira sua API Key no projeto para a Alumi ganhar vida
+
+-   Acesse a pasta clonada do projeto.
+-   Acesse a pasta gemini.
+-   Acesse o arquivo apiKey.ts.
+-   Onde esta escrito 'SUA API KEY AQUI' substitua pela sua própria API Key, LEMBRE-SE DE MANTÊ-LÁ ENTRE AS ASPAS.
+
+### 6. Rodar o projeto
 
 ```bash
 npm run start #Irá iniciar apenas o Metro
@@ -65,9 +79,9 @@ npm run start #Irá iniciar apenas o Metro
 npm run android #Irá iniciar o Metro e abrirá o emulador caso configurado corretamente
 ```
 
-Caso queira utilizar seu dispositivo móvel para verificar o projeto
+Caso queira utilizar seu dispositivo móvel para verificar o projeto:
 
--   Abra o aplicativo Expo Go no celular, e escaneie o QR Code gerado pelo Metro
+-   Abra o aplicativo Expo Go no celular, e escaneie o QR Code gerado pelo Metro.
     > Certifique-se de ter o [Expo Go SDK 53](https://expo.dev/client) instalado no seu celular para testar o app via QR Code.
 
 ## 📸 Imagens
