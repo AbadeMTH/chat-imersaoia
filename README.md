@@ -64,7 +64,7 @@ yarn install
 -   Copie sua API Key que irá aparecer para você, NÃO COMPARTILHE ESSA CHAVE COM NINGUÉM!
 -   Caso por algum motivo você ja tenha um projeto no Google Cloud, clique no campo de pesquisa e selecione o projeto (provavelmente esteja nomeado como Gemini API, se existir), após isso clique no botão azul embaixo para gerar sua API Key.
 
-#### 5. Insira sua API Key no projeto para a Alumi ganhar vida
+### 5. Insira sua API Key no projeto para a Alumi ganhar vida
 
 -   Acesse a pasta clonada do projeto.
 -   Acesse a pasta gemini.
