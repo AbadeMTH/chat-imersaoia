@@ -65,7 +65,7 @@ npm run start #Irá iniciar apenas o Metro
 npm run android #Irá iniciar o Metro e abrirá o emulador caso configurado corretamente
 ```
 
-Caso queira utilizar seu dispositivo móvel para verificar o projeto?
+Caso queira utilizar seu dispositivo móvel para verificar o projeto
 
 -   Abra o aplicativo Expo Go no celular, e escaneie o QR Code gerado pelo Metro
     > Certifique-se de ter o [Expo Go SDK 53](https://expo.dev/client) instalado no seu celular para testar o app via QR Code.
