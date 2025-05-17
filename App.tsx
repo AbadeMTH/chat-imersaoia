@@ -3,21 +3,22 @@ import {
     Image,
     Keyboard,
     KeyboardAvoidingView,
-    Platform,
     StyleSheet,
     Text,
     TextInput,
     TouchableOpacity,
-    TouchableWithoutFeedback,
     View,
 } from "react-native";
 import { response } from "./gemini/api";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { generatesIdMessage, messages } from "./data/data";
 import { Message } from "./types/Message";
 import { MessageBox } from "./components/MessageBox/MessageBox";
 import { FontAwesome } from "@expo/vector-icons";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import * as SplashScreen from "expo-splash-screen";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
     const [userMsg, setUserMsg] = useState("");
@@ -25,9 +26,22 @@ export default function App() {
     const [loading, setLoading] = useState(false);
     const [keyboardHeight, setKeyboardHeight] = useState(0);
     const [disabled, setDisabled] = useState(false);
+    const [appIsReady, setAppIsReady] = useState(false);
     const flatlistRef = useRef<FlatList>(null);
 
     useEffect(() => {
+        async function prepare() {
+            try {
+            } catch (e) {
+                console.warn(e);
+            } finally {
+                // Tell the application to render
+                setAppIsReady(true);
+            }
+        }
+
+        prepare();
+
         const showSubscription = Keyboard.addListener(
             "keyboardDidShow",
             (event) => {
@@ -43,6 +57,16 @@ export default function App() {
             hideSubscription.remove();
         };
     }, []);
+
+    const onLayoutRootView = useCallback(() => {
+        if (appIsReady) {
+            SplashScreen.hide();
+        }
+    }, [appIsReady]);
+
+    if (!appIsReady) {
+        return null;
+    }
 
     async function AdicionaMensagens(msg: string) {
         if (msg.trim().length != 0) {
@@ -130,7 +154,10 @@ export default function App() {
     return (
         <SafeAreaProvider>
             <KeyboardAvoidingView style={{ flex: 1 }}>
-                <SafeAreaView style={styles.container}>
+                <SafeAreaView
+                    style={styles.container}
+                    onLayout={onLayoutRootView}
+                >
                     {messages.length > 0 ? (
                         <FlatList
                             ref={flatlistRef}

@@ -4,12 +4,11 @@
         "slug": "chatbot-imersaoia",
         "version": "1.0.0",
         "orientation": "portrait",
-        "icon": "",
         "userInterfaceStyle": "light",
         "newArchEnabled": true,
         "splash": {
-            "image": "./assets/splash.jpg",
-            "resizeMode": "cover",
+            "image": "./assets/logoNome.jpg",
+            "resizeMode": "contain",
             "backgroundColor": "#F5F5DC"
         },
         "ios": {

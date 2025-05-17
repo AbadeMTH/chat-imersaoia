@@ -2,11 +2,17 @@
 
 Aplicativo mobile desenvolvido com React Native, voltado ao suporte emocional de pessoas que estejam enfrentando crises psicológicas. Através de um chatbot empático e acessível, o app oferece acolhimento inicial, escuta ativa e orientações básicas para momentos de sofrimento psíquico.
 
+## Observações
+
+-   O aplicativo foi desenvolvido e testado somente para dispositivos Android!
+-   As respostas e as hipóteses diagnósticas da Alumi foram projetadas para serem eficazes e coerentes, mas nunca substituirão um profissional capacitado, se precisar, procure ajuda profissional!
+-   O aplicativo irá funcionar apenas na SDK 53 do Expo Go!
+
 ## 📱 Funcionalidades
 
 -   💬 **Chat para Ajuda** – Converse com a nossa assistente, Alumi, para receber ajuda em momentos de crise!
 -   🛜 **Conexão com Gemini** – A Alumi utiliza a inteligência artificial do google, Gemini, para te ajudar!
--   **talves indicação de psicologos**
+-   📲 **Indicação de Profissionais Especializados** - Nosso chat indica um grupo de psicólogos com renome caso o usuário queira ajuda profissional!
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -39,8 +45,8 @@ Escolha uma das opções para rodar o app:
 ### 2. Clonar o repositório
 
 ```bash
-git clone https://github.com/AbadeMTH/FuriaChatBot.git
-cd FuriaChatBot
+git clone https://github.com/AbadeMTH/chat-imersaoia.git
+cd chat-imersaoia
 ```
 
 ### 3. Instalar as dependências
@@ -59,14 +65,10 @@ npm run start #Irá iniciar apenas o Metro
 npm run android #Irá iniciar o Metro e abrirá o emulador caso configurado corretamente
 ```
 
-Caso queiro utilizar seu dispositivo móvel para verificar o projeto?
+Caso queira utilizar seu dispositivo móvel para verificar o projeto?
 
 -   Abra o aplicativo Expo Go no celular, e escaneie o QR Code gerado pelo Metro
-    > Certifique-se de ter o [Expo Go SDK 52](https://expo.dev/client) instalado no seu celular para testar o app via QR Code.
-
-## OBSERVAÇÕES
-- O aplicativo foi desenvolvido e testado APENAS em dispositivos ANDROIDS!
-- O Expo Go deve ser instalado baseado na sua versão da SDK 52!
+    > Certifique-se de ter o [Expo Go SDK 53](https://expo.dev/client) instalado no seu celular para testar o app via QR Code.
 
 ## 📸 Imagens
 
@@ -88,30 +90,20 @@ Caso queiro utilizar seu dispositivo móvel para verificar o projeto?
   </tr>
 </table>
 
-### Prints do Chat no Tema Claro
+### Print do Chat Vazio
 
 <table>
   <tr>
-    <td align="center"><img src="./assets/images/prints/chatEmptyLight.png" width="300" alt="Chat Vazio Claro"/></td>
-    <td align="center"><img src="./assets/images/prints/chatLight.png" width="300" alt="Chat Claro"/></td>
+    <td align="center"><img src="./assets/prints/emptyChat.png" width="300" alt="Chat Vazio"/></td>
   </tr>
 </table>
 
-### Prints da Tela Eventos em ambos Temas
+### Prints do Chat com Mensagens
 
 <table>
   <tr>
-    <td align="center"><img src="./assets/images/prints/eventsDark.png" width="300" alt="Eventos Escuro"/></td>
-    <td align="center"><img src="./assets/images/prints/eventsLight.png" width="300" alt="Eventos Claro"/></td>
-  </tr>
-</table>
-
-### Prints da Tela Line-Up em ambos Temas
-
-<table>
-  <tr>
-    <td align="center"><img src="./assets/images/prints/lineupDark.png" width="300" alt="Lineup Escuro"/></td>
-    <td align="center"><img src="./assets/images/prints/lineupLight.png" width="300" alt="Lineup Claro"/></td>
+    <td align="center"><img src="./assets/prints/chat1.png" width="300" alt="Chat com mensagens"/></td>
+    <td align="center"><img src="./assets/prints/chat2.png" width="300" alt="Chat com mensagens"/></td>
   </tr>
 </table>
 
