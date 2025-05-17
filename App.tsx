@@ -47,6 +47,19 @@ export default function App() {
                     user: false,
                 };
                 messages.push(newMessageAI);
+                if (
+                    geminiResponse.includes(
+                        "https://grupopbe.fernandalandeiro.com.br/clinica/"
+                    )
+                ) {
+                    // const newMessageAILink: Message = {
+                    //     id: generatesIdMessage(),
+                    //     text: "Clique para acessar o Grupo PBE",
+                    //     user: false,
+                    // };
+                    // messages.push(newMessageAILink);
+                }
+
                 setUpdate((prev) => prev + 1);
             }
         }
@@ -131,6 +144,7 @@ export default function App() {
                             value={userMsg}
                             onChangeText={(prev) => setUserMsg(prev)}
                             style={styles.textInput}
+                            autoCapitalize="sentences"
                         />
                         <TouchableOpacity
                             onPress={() => AdicionaMensagens(userMsg)}
@@ -218,8 +232,8 @@ const styles = StyleSheet.create({
         justifyContent: "space-evenly",
     },
     image: {
-        width: 25,
-        height: 25,
+        width: 30,
+        height: 30,
         margin: 10,
         marginRight: -10,
         borderRadius: 30,
