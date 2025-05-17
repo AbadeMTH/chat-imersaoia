@@ -1,24 +1,24 @@
 {
     "expo": {
-        "name": "chatbot-imersaoia",
+        "name": "Alumi",
         "slug": "chatbot-imersaoia",
         "version": "1.0.0",
         "orientation": "portrait",
-        "icon": "./assets/icon.png",
+        "icon": "./assets/logoNome.jpg",
         "userInterfaceStyle": "light",
         "newArchEnabled": true,
         "splash": {
-            "image": "./assets/splash-icon.png",
+            "image": "./assets/logoNome.jpg",
             "resizeMode": "contain",
-            "backgroundColor": "#ffffff"
+            "backgroundColor": "#F5F5DC"
         },
         "ios": {
             "supportsTablet": true
         },
         "android": {
             "adaptiveIcon": {
-                "foregroundImage": "./assets/adaptive-icon.png",
-                "backgroundColor": "#ffffff"
+                "foregroundImage": "./assets/logo.jpg",
+                "backgroundColor": "#F5F5DC"
             },
             "edgeToEdgeEnabled": false,
             "softwareKeyboardLayoutMode": "pan"

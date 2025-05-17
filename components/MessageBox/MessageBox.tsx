@@ -41,21 +41,24 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 10,
         maxWidth: "80%",
-        backgroundColor: "red",
+        backgroundColor: "#538f8f",
+        elevation: 6,
     },
     boxTextUser: {
         fontSize: 16,
-        color: "#FFF",
+        color: "#FFFFFF",
     },
     boxMessageChat: {
         borderTopStartRadius: 0,
         borderRadius: 10,
         padding: 10,
+
         maxWidth: "80%",
-        backgroundColor: "blue",
+        backgroundColor: "#f0f0e0",
+        elevation: 3,
     },
     boxTextChat: {
         fontSize: 16,
-        color: "#FFF",
+        color: "#000000",
     },
 });

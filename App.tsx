@@ -1,5 +1,6 @@
 import {
     FlatList,
+    Image,
     Keyboard,
     KeyboardAvoidingView,
     Platform,
@@ -32,14 +33,14 @@ export default function App() {
             };
             messages.push(newMessageUser);
             setTimeout(() => {
-                setLoading((prev) => !prev);
+                setLoading(true);
             }, 400);
             closeKeyboard();
             setUserMsg("");
             setUpdate((prev) => prev + 1);
             const geminiResponse = await response(msg);
             if (geminiResponse) {
-                setLoading((prev) => !prev);
+                setLoading(false);
                 const newMessageAI: Message = {
                     id: generatesIdMessage(),
                     text: geminiResponse,
@@ -65,7 +66,33 @@ export default function App() {
     }
 
     function RenderItem({ item }: { item: Message }) {
-        return <MessageBox {...item} />;
+        return (
+            <>
+                {item.user ? (
+                    <MessageBox {...item} />
+                ) : (
+                    <View style={styles.imageContainer}>
+                        <Image
+                            source={require("./assets/logo.jpg")}
+                            style={styles.image}
+                        />
+                        <MessageBox {...item} />
+                    </View>
+                )}
+            </>
+        );
+    }
+
+    function FooterItem() {
+        return (
+            <>
+                {loading ? (
+                    <Text style={styles.typing}>
+                        Assistente está digitando...
+                    </Text>
+                ) : null}
+            </>
+        );
     }
     return (
         <KeyboardAvoidingView
@@ -82,20 +109,22 @@ export default function App() {
                             renderItem={RenderItem}
                             extraData={update}
                             onContentSizeChange={scrollListToBottom}
+                            ListFooterComponent={FooterItem}
                             style={styles.list}
                         />
                     ) : (
                         <View style={styles.emptyChat}>
                             <Text style={styles.emptyChatMessage}>
-                                Digite o que sente ou como está, irei te ajudar!
+                                Bem-vindo(a), sou Alumi, sua assistente de
+                                cuidado psicológico!
+                            </Text>
+                            <Text style={styles.emptyChatSubmessage}>
+                                Me diga como está se sentindo e estarei pronta
+                                para te ajudar!
                             </Text>
                         </View>
                     )}
-                    {loading && (
-                        <Text style={styles.typing}>
-                            Assistente digitando...
-                        </Text>
-                    )}
+
                     <View style={styles.textInputContainer}>
                         <TextInput
                             placeholder="Digite aqui..."
@@ -107,7 +136,11 @@ export default function App() {
                             onPress={() => AdicionaMensagens(userMsg)}
                             style={styles.sendMessageButton}
                         >
-                            <FontAwesome name="send-o" size={20} />
+                            <FontAwesome
+                                name="send-o"
+                                size={20}
+                                color="#FFFFFF"
+                            />
                         </TouchableOpacity>
                     </View>
                 </SafeAreaView>
@@ -119,6 +152,7 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#e7f5e6",
     },
     list: {
         flex: 1,
@@ -140,27 +174,55 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 15,
         borderRadius: 25,
-        backgroundColor: "#d9d9d9",
+        backgroundColor: "#FFFFFF",
         marginRight: 10,
         fontSize: 16,
+        color: "#000000",
+        borderWidth: 1,
+        borderColor: "#2F4F4F",
     },
     sendMessageButton: {
         justifyContent: "center",
         alignItems: "center",
         borderRadius: 50,
-        backgroundColor: "#d9d9d9",
+        backgroundColor: "#6db2b2",
         width: 45,
         height: 45,
     },
     typing: {
-        fontSize: 20,
+        fontSize: 14,
         fontWeight: "bold",
         fontStyle: "italic",
+        paddingLeft: 30,
+        paddingBottom: 10,
     },
     emptyChatMessage: {
         fontSize: 20,
         fontWeight: "bold",
         fontStyle: "italic",
         textAlign: "center",
+    },
+    emptyChatSubmessage: {
+        fontSize: 14,
+        fontWeight: "bold",
+        fontStyle: "italic",
+        textAlign: "center",
+        color: "gray",
+        width: 250,
+        marginTop: 15,
+        opacity: 1,
+    },
+    imageContainer: {
+        flexDirection: "row",
+        alignItems: "flex-end",
+        justifyContent: "space-evenly",
+    },
+    image: {
+        width: 25,
+        height: 25,
+        margin: 10,
+        marginRight: -10,
+        borderRadius: 30,
+        elevation: 6,
     },
 });
