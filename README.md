@@ -14,7 +14,6 @@ Aplicativo mobile desenvolvido com React Native, voltado ao suporte emocional de
 -   [Expo](https://expo.dev/)
 -   [TypeScript](https://www.typescriptlang.org/)
 -   [FontAwesome](https://fontawesome.com/) – Ícones personalizados
--   [React ]
 -   [Gemini API](https://ai.google.dev/gemini-api/docs?hl=pt-br#javascript)
 
 ## 📦 Instalação

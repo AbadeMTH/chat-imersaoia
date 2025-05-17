@@ -11,5 +11,5 @@ const chat = ai.chats.create({model: "gemini-2.0-flash", config: {systemInstruct
 export async function response(msg: string) {
     const response = await chat.sendMessage({message: msg});
     const text = response.text;
-    return text;
+    return text?.replace(/\*{1,2}(.+?)\*{1,2}/g, '$1');;
 }

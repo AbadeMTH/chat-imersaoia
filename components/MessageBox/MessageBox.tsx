@@ -1,7 +1,12 @@
 import React from "react";
 import { Message } from "../../types/Message";
-import { StyleSheet, Text, View } from "react-native";
-
+import {
+    Linking,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from "react-native";
 export function MessageBox(props: Message) {
     return (
         <View
@@ -15,9 +20,32 @@ export function MessageBox(props: Message) {
                     <Text style={styles.boxTextUser}>{props.text}</Text>
                 </View>
             ) : (
-                <View style={styles.boxMessageChat}>
-                    <Text style={styles.boxTextChat}>{props.text}</Text>
-                </View>
+                <>
+                    {props.link ? (
+                        <View style={styles.boxMessageChat}>
+                            <TouchableOpacity
+                                onPress={() =>
+                                    Linking.openURL(
+                                        "https://grupopbe.fernandalandeiro.com.br/clinica/"
+                                    )
+                                }
+                            >
+                                <Text
+                                    style={[
+                                        styles.boxTextChat,
+                                        { color: "#538f8f" },
+                                    ]}
+                                >
+                                    {props.text}
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    ) : (
+                        <View style={styles.boxMessageChat}>
+                            <Text style={styles.boxTextChat}>{props.text}</Text>
+                        </View>
+                    )}
+                </>
             )}
         </View>
     );

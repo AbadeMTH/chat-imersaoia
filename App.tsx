@@ -3,20 +3,24 @@ import {
     Image,
     Keyboard,
     KeyboardAvoidingView,
+    LayoutAnimation,
     Platform,
+    ScrollView,
     StyleSheet,
     Text,
     TextInput,
     TouchableOpacity,
+    TouchableWithoutFeedback,
     View,
 } from "react-native";
 import { response } from "./gemini/api";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { generatesIdMessage, messages } from "./data/data";
 import { Message } from "./types/Message";
 import { MessageBox } from "./components/MessageBox/MessageBox";
 import { FontAwesome } from "@expo/vector-icons";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
     const [userMsg, setUserMsg] = useState("");
@@ -24,12 +28,43 @@ export default function App() {
     const [loading, setLoading] = useState(false);
     const flatlistRef = useRef<FlatList>(null);
 
+    // const KeyboardSpacer = () => {
+    //     const [keyboardHeight, setKeyboardHeight] = useState(0);
+
+    //     useEffect(() => {
+    //         const showSub = Keyboard.addListener("keyboardDidShow", (e) => {
+    //             LayoutAnimation.configureNext(
+    //                 LayoutAnimation.Presets.easeInEaseOut
+    //             );
+    //             setKeyboardHeight(10);
+    //         });
+
+    //         const hideSub = Keyboard.addListener("keyboardDidHide", () => {
+    //             LayoutAnimation.configureNext(
+    //                 LayoutAnimation.Presets.easeInEaseOut
+    //             );
+    //             setKeyboardHeight(0);
+    //         });
+
+    //         return () => {
+    //             showSub.remove();
+    //             hideSub.remove();
+    //         };
+    //     }, []);
+
+    //     // No iOS não precisa
+    //     if (Platform.OS === "ios") return null;
+
+    //     return <View style={{ height: keyboardHeight }} />;
+    // };
+
     async function AdicionaMensagens(msg: string) {
         if (msg.trim().length != 0) {
             const newMessageUser: Message = {
                 id: generatesIdMessage(),
                 text: msg,
                 user: true,
+                link: false,
             };
             messages.push(newMessageUser);
             setTimeout(() => {
@@ -45,21 +80,18 @@ export default function App() {
                     id: generatesIdMessage(),
                     text: geminiResponse,
                     user: false,
+                    link: false,
                 };
                 messages.push(newMessageAI);
-                if (
-                    geminiResponse.includes(
-                        "https://grupopbe.fernandalandeiro.com.br/clinica/"
-                    )
-                ) {
-                    // const newMessageAILink: Message = {
-                    //     id: generatesIdMessage(),
-                    //     text: "Clique para acessar o Grupo PBE",
-                    //     user: false,
-                    // };
-                    // messages.push(newMessageAILink);
+                if (geminiResponse.includes("Grupo PBE")) {
+                    const newMessageAILink: Message = {
+                        id: generatesIdMessage(),
+                        text: "Clique para acessar o Grupo PBE",
+                        user: false,
+                        link: true,
+                    };
+                    messages.push(newMessageAILink);
                 }
-
                 setUpdate((prev) => prev + 1);
             }
         }
@@ -108,58 +140,66 @@ export default function App() {
         );
     }
     return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === "android" ? undefined : "padding"}
-            style={{ flex: 1 }}
-        >
-            <SafeAreaProvider>
-                <SafeAreaView style={styles.container}>
-                    {messages.length > 0 ? (
-                        <FlatList
-                            ref={flatlistRef}
-                            data={messages}
-                            keyExtractor={(item) => item.id.toString()}
-                            renderItem={RenderItem}
-                            extraData={update}
-                            onContentSizeChange={scrollListToBottom}
-                            ListFooterComponent={FooterItem}
-                            style={styles.list}
-                        />
-                    ) : (
-                        <View style={styles.emptyChat}>
-                            <Text style={styles.emptyChatMessage}>
-                                Bem-vindo(a), sou Alumi, sua assistente de
-                                cuidado psicológico!
-                            </Text>
-                            <Text style={styles.emptyChatSubmessage}>
-                                Me diga como está se sentindo e estarei pronta
-                                para te ajudar!
-                            </Text>
-                        </View>
-                    )}
-
-                    <View style={styles.textInputContainer}>
-                        <TextInput
-                            placeholder="Digite aqui..."
-                            value={userMsg}
-                            onChangeText={(prev) => setUserMsg(prev)}
-                            style={styles.textInput}
-                            autoCapitalize="sentences"
-                        />
-                        <TouchableOpacity
-                            onPress={() => AdicionaMensagens(userMsg)}
-                            style={styles.sendMessageButton}
-                        >
-                            <FontAwesome
-                                name="send-o"
-                                size={20}
-                                color="#FFFFFF"
+        <SafeAreaProvider>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === "android" ? undefined : "padding"}
+                keyboardVerticalOffset={30}
+                style={{ flex: 1 }}
+                
+            >
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                    <SafeAreaView style={styles.container}>
+                        <StatusBar style="auto" />
+                        {messages.length > 0 ? (
+                            <FlatList
+                                ref={flatlistRef}
+                                data={messages}
+                                keyExtractor={(item) => item.id.toString()}
+                                renderItem={RenderItem}
+                                extraData={update}
+                                onContentSizeChange={scrollListToBottom}
+                                ListFooterComponent={FooterItem}
+                                style={styles.list}
                             />
-                        </TouchableOpacity>
-                    </View>
-                </SafeAreaView>
-            </SafeAreaProvider>
-        </KeyboardAvoidingView>
+                        ) : (
+                            <View style={styles.emptyChat}>
+                                <Text style={styles.emptyChatMessage}>
+                                    Bem-vindo(a), sou Alumi, sua assistente de
+                                    cuidado psicológico!
+                                </Text>
+                                <Text style={styles.emptyChatSubmessage}>
+                                    Me diga como está se sentindo e estarei
+                                    pronta para te ajudar!
+                                </Text>
+                            </View>
+                        )}
+
+                        <View style={styles.textInputContainer}>
+                            <TextInput
+                                placeholder="Digite aqui..."
+                                value={userMsg}
+                                onChangeText={(prev) => setUserMsg(prev)}
+                                style={styles.textInput}
+                                autoCapitalize="sentences"
+                                multiline={true}
+                                numberOfLines={3}
+                            />
+                            <TouchableOpacity
+                                onPress={() => AdicionaMensagens(userMsg)}
+                                style={styles.sendMessageButton}
+                            >
+                                <FontAwesome
+                                    name="send-o"
+                                    size={20}
+                                    color="#FFFFFF"
+                                />
+                            </TouchableOpacity>
+                        </View>
+                        {/* <KeyboardSpacer /> */}
+                    </SafeAreaView>
+                </TouchableWithoutFeedback>
+            </KeyboardAvoidingView>
+        </SafeAreaProvider>
     );
 }
 
@@ -167,6 +207,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#e7f5e6",
+        paddingVertical: 7,
     },
     list: {
         flex: 1,
@@ -182,7 +223,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-between",
         paddingHorizontal: 15,
-        paddingVertical: 5,
+        paddingBottom: 10,
     },
     textInput: {
         flex: 1,
