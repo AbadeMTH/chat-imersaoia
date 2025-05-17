@@ -72,24 +72,6 @@ Caso queira utilizar seu dispositivo móvel para verificar o projeto?
 
 ## 📸 Imagens
 
-### Prints da Tela Home em ambos Temas
-
-<table>
-  <tr>
-    <td align="center"><img src="./assets/images/prints/homeDark.png" width="300" alt="Tema Escuro"/></td>
-    <td align="center"><img src="./assets/images/prints/homeLight.png" width="300" alt="Tema Claro"/></td>
-  </tr>
-</table>
-
-### Prints do Chat no Tema Escuro
-
-<table>
-  <tr>
-    <td align="center"><img src="./assets/images/prints/chatEmptyDark.png" width="300" alt="Chat Vazio Escuro"/></td>
-    <td align="center"><img src="./assets/images/prints/chatDark.png" width="300" alt="Chat Escuro"/></td>
-  </tr>
-</table>
-
 ### Print do Chat Vazio
 
 <table>
