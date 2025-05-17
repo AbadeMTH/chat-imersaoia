@@ -4,12 +4,12 @@
         "slug": "chatbot-imersaoia",
         "version": "1.0.0",
         "orientation": "portrait",
-        "icon": "./assets/logoNome.jpg",
+        "icon": "",
         "userInterfaceStyle": "light",
         "newArchEnabled": true,
         "splash": {
-            "image": "./assets/logoNome.jpg",
-            "resizeMode": "contain",
+            "image": "./assets/splash.jpg",
+            "resizeMode": "cover",
             "backgroundColor": "#F5F5DC"
         },
         "ios": {
@@ -21,7 +21,7 @@
                 "backgroundColor": "#F5F5DC"
             },
             "edgeToEdgeEnabled": false,
-            "softwareKeyboardLayoutMode": "pan"
+            "softwareKeyboardLayoutMode": "resize"
         },
         "web": {
             "favicon": "./assets/favicon.png"
