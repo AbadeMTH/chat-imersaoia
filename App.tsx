@@ -15,6 +15,7 @@ import { MessageBox } from "./components/MessageBox/MessageBox";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { EmptyChat } from "./components/EmptyChat/EmptyChat";
 import { ChatInput } from "./components/ChatInput/ChatInput";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
     const [updateList, setUpdateList] = useState(false);
@@ -115,6 +116,7 @@ export default function App() {
 
     return (
         <SafeAreaProvider>
+            <StatusBar style="auto" />
             <KeyboardAvoidingView style={{ flex: 1 }}>
                 <SafeAreaView style={styles.container}>
                     {messages.length > 0 ? (
