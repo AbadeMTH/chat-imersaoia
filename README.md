@@ -7,6 +7,7 @@ Aplicativo mobile desenvolvido com React Native, voltado ao suporte emocional de
 -   O aplicativo foi desenvolvido e testado somente para dispositivos Android!
 -   As respostas e as hipóteses diagnósticas da Alumi foram projetadas para serem eficazes e coerentes, mas nunca substituirão um profissional capacitado, se precisar, procure ajuda profissional!
 -   O aplicativo irá funcionar apenas na SDK 53 do Expo Go!
+-   Estou aprimorando o aplicativo utilizando Development Build do Expo, talvez não funcione como devido no Expo Go! Logo disponibilizarei um arquivo .apk para instalação!
 
 ## 📱 Funcionalidades
 
